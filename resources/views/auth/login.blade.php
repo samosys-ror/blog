@@ -20,7 +20,7 @@
                             <label for="email" class=""style="width: 20%">{{ __('') }}</label>
 
                             <div class="col-md-8">
-                                <input id="email" type="text" class="form-control @error('username') is-invalid @enderror" name="email" placeholder="Enter Your Username"value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                <input id="email" type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Enter Your Username"value="{{ old('username') }}" required autocomplete="username" autofocus>
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
