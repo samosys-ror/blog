@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+
+
 class UserController extends Controller
 {
     /**
@@ -11,6 +16,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    use AuthenticatesUsers;
+
     public function index()
     {
         //
@@ -35,8 +44,11 @@ class UserController extends Controller
 
 
   public function success()
-   {
+   { 
 
+        $this->guard()->logout();
+
+      
     return view('auth/success');
    } 
 
