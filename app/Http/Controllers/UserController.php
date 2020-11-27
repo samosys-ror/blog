@@ -46,10 +46,10 @@ class UserController extends Controller
   public function success()
    { 
 
-        $this->guard()->logout();
+        //$this->guard()->logout();
 
       
-    return view('auth/success');
+       return view('auth/success');
    } 
 
 
