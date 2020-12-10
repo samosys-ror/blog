@@ -25,3 +25,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/getUser','UserController@getUser')->name('getUser');
 
 Route::get('/success','UserController@success')->name('success');
+
+
+Route::resource('knowledge','KnowledgeController');
+
+
+Route::get('search','KnowledgeController@search')->name('search');
+
+Route::resource('comment','CommentController');
+Route::get('/contact','ApiController@Contact')->name('contact');

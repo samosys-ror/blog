@@ -174,7 +174,7 @@ You will then get the confirmation email. Please open the email and click to act
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Terms & Conditions*') }}</label>
 
                             <div class="col-md-6">
-                                <div id="terms_and_conditions" class="controls" style="overflow: scroll; height: 200px; background-color: #ffffff; padding: 10px;">
+                                <div id="terms_and_conditions" class="controls" style="overflow: scroll; height: 200px;width:450px; background-color: #ffffff; padding: 10px;">
         <p>Website Terms &amp; Conditions</p>
         <ol>
             <li>

@@ -19,13 +19,14 @@ class CreateUsersTable extends Migration
             $table->string('lname');
             $table->string('username');
 
-            $table->Integer('mobile')->unsigned();
+            $table->BigInteger('mobile')->unsigned();
 
-            $table->Integer('phone')->unsigned();
+            $table->BigInteger('phone')->unsigned();
             
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('show_password');
             $table->rememberToken();
             $table->timestamps();
         });
