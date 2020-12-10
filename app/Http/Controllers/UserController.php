@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Http;
 
-
+use Auth;
 
 class UserController extends Controller
 {
@@ -45,11 +46,58 @@ class UserController extends Controller
 
   public function success()
    { 
+       $header=[    
+              "Api-Key"=>"14FF3618556206C62CAD177EC037C952",
+              "login_name"=>'Apps_Vila',
+              "login_password"=>'password',
+             ];
 
-        //$this->guard()->logout();
+
+
+
+        $response = Http::post("https://demo.signifycrm.net/portaltest/rest_api/v1/rest/login",$header);
+         
+
+        $res= $response->json();
+
+        $user=$res['data'];
+
+        $user=json_decode($user);
+
+       $user_id=$user->name_value_list->user_id->value;
+
+       
+
+       $usr=Auth::user();
+
+
+    $data= [
+        "Api-Key"=>"14FF3618556206C62CAD177EC037C952",
+        "session_id"=>$user->id,
+        "module_name"=>"Contacts",
+        "name_value_list"=>[
+              "first_name"=>$usr->name,
+              "last_name"=>$usr->lname,
+              "description"=>'Test  Lead',
+               "assigned_user_id"=>$user_id,
+              "email1"=>$usr->email,
+              "citizen_id"=>"0764995947373",
+              "user_name_s"=>$usr->username,
+              "user_hash_s"=>$usr->show_password,
+              "phone_mobile"=>$usr->mobile,
+              "phone_work"=>$usr->Phone
+             ]
+      ];
+       
+    $rsp = Http::post("https://demo.signifycrm.net/portaltest/rest_api/v1/rest/set_entry",$data);
+         
+     if($rsp->status()==200)
+       {
+          $this->guard()->logout();
 
       
-       return view('auth/success');
+           return view('auth/success');
+       }
    } 
 
 

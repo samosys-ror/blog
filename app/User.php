@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Role;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -16,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name','lname','username','mobile','phone', 'email', 'password',
+        'name','lname','username','mobile','phone', 'email', 'password','show_password',
     ];
 
     /**
@@ -24,6 +26,42 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
+
+  public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+    
+    
+  public function hasAnyRoles($roles)
+    {
+        if($this->roles()->where('name',$role)->first())
+        {
+            return true;
+            
+        }   
+        else
+        {
+            return false;
+        }   
+
+      }
+      
+ public function hasRole($roles)
+    {
+        if($this->roles()->where('name',$roles)->first())
+        {
+            return true;
+            
+        }   
+        else
+        {
+            return false;
+        }  
+      }    
+
+
+
     protected $hidden = [
         'password', 'remember_token',
     ];

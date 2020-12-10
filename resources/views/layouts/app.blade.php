@@ -23,7 +23,7 @@
          {!! NoCaptcha::renderJs() !!}
 
 </head>
-<body>
+<body onload="search()">
     <div id="app">
         <nav class="navbar navbar-expand-md  shadow-sm"style="background-color: #000;color:#ffff;">
             <div class="container">
@@ -36,21 +36,29 @@
 
                     <li class="nav-item nav-link"><i class="fa fa-home"></i>Home</li>
 
-                    <li class="nav-item nav-link"style="padding-left: 7%"> <i class="fa fa-search"></i>Search Existing Case</li>
+                    <li class="nav-item nav-link"style="padding-left: 5%"> <i class="fa fa-search"></i>Search Existing Case</li>
                       
-                    <li class="nav-item  nav-link"style="padding-left: 6%">
+                    <li class="nav-item  nav-link"style="padding-left: 5%">
                         <i class="fa fa-comment"></i>Create New Case</li>
-                  <li class="nav-item nav-link"style="padding-left: 6%"><i class="fa fa-book"></i>Download Corner</li>
+                  <li class="nav-item nav-link"style="padding-left: 5%"><i class="fa fa-book"></i>Download Corner</li>
 
 
                   
+                  <?php //$role=Auth::user()->roles->pluck('name');  ?>
 
 
+                    <li class="nav-item nav-link"style="padding-left:2%">
 
-                    <li class="nav-item nav-link"style="padding-left: 5%">
+                    <i class="fa fa-envelope"></i>Contact Us</li>
+                    <li class="nav-item nav-link"style="padding-left:2%"> 
 
-                       <i class="fa fa-envelope"></i>Contact Us</li>
-                 
+                   @can('create')
+                    <a href="{{ url('/knowledge/create')}}"><i class="fa fa-envelope"></i>Create Article</a></li>
+
+                   @endcan
+
+                  </li>
+                     
 
                   </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
