@@ -71,6 +71,7 @@ class UserController extends Controller
        $usr=Auth::user();
 
 
+    $user_mobile = '+'.$usr->mobile;   
     $data= [
         "Api-Key"=>"14FF3618556206C62CAD177EC037C952",
         "session_id"=>$user->id,
@@ -78,14 +79,12 @@ class UserController extends Controller
         "name_value_list"=>[
               "first_name"=>$usr->name,
               "last_name"=>$usr->lname,
-              "description"=>'Test  Lead',
                "assigned_user_id"=>$user_id,
               "email1"=>$usr->email,
-              "citizen_id"=>"0764995947373",
               "user_name_s"=>$usr->username,
               "user_hash_s"=>$usr->show_password,
-              "phone_mobile"=>$usr->mobile,
-              "phone_work"=>$usr->Phone
+              "phone_mobile"=>$user_mobile,
+              "phone_work"=>$usr->phone
              ]
       ];
        
