@@ -126,8 +126,7 @@ You will then get the confirmation email. Please open the email and click to act
 
                             <div class="col-md-6">
                                 <input id="mobile" type="text" class=" mobile form-control @error('name') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autofocus  onkeypress="return onlyNumberKey(event)"  onkeyup="return onlyNumberKey(event)">
-                                <span>(Format: +66XXXXXXXXX, +66-XXX-XXX-XXX, +66 XXX XXX XXX)
-</span>
+                                <span>(Format: +66XXXXXXXXX, +66-XXX-XXX-XXX, +66 XXX XXX XXX)</span>
 
                                 @error('mobile')
                                     <span class="invalid-feedback" role="alert">
@@ -295,7 +294,7 @@ By using the Signify Website, you acknowledge that you are of legal age to form 
         <div class="col-md-4">
             <div class="card">
               <div class="card-header"style="font-size: 20px;background-color: #ffff;">
-                <center><strong><img src="image/Signify1.png"width="300/></strong></ceneter>
+                <center><strong><img src="image/Signify1.png"width="300"/></strong></ceneter>
                 </div>  
 
 
