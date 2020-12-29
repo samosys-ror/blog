@@ -66,7 +66,7 @@ class VerificationController extends Controller
 
     if ($user->markEmailAsVerified())
         event(new Verified($user));
-
+    Auth::logout();
     return redirect($this->redirectPath())->with('verified', true);
    }
 }
