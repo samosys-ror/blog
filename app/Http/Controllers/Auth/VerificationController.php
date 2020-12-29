@@ -1,20 +1,19 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
+
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+//use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 
 use Illuminate\Auth\Events\Verified;
 
 use Illuminate\Http\Request;
-
 class VerificationController extends Controller
 {
     /*
@@ -30,7 +29,7 @@ class VerificationController extends Controller
 
     //use VerifiesEmails;
    
-     use VerifiesEmails, RegistersUsers;
+     use VerifiesEmails;
 
 
     /**
@@ -69,4 +68,8 @@ class VerificationController extends Controller
 
     return redirect($this->redirectPath())->with('verified', true);
    }
+  protected function guard()
+    {
+        return Auth::guard();
+    }
 }

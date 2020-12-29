@@ -24,10 +24,10 @@ class UserSeeder extends Seeder
 		$adm=User::create([
 		 'name'=>'admin',
 		  'lname'=>'user',
-		  'username'=>'admin',
+		  'username'=>'samosys',
 		  'mobile'=>'885458755',
 		  'phone'=>'7595846718',
-		 'email'=>'admin@gmail.com',
+		 'email'=>'rajkumarmp2017@gmail.com',
 		 'password'=>Hash::make('admin123')
 		
 		
