@@ -88,15 +88,12 @@ class UserController extends Controller
               "phone_work"=>$usr->phone
              ]
       ];
-       
     $rsp = Http::post("https://demo.signifycrm.net/portaltest/rest_api/v1/rest/set_entry",$data);
          
-     if($rsp->status()==200)
+        if($rsp->status()==200)
        {
-          $this->guard()->logout();
-
-      
-           return view('auth/success');
+            $this->guard()->logout();   
+            return view('auth/success');
        }
    } 
 
