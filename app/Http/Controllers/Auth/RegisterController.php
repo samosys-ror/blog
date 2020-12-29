@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -38,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest');
+        $this->middleware('guest');
     }
 
     /**
@@ -83,13 +85,10 @@ class RegisterController extends Controller
     }
     public function register(Request $request)
     {
-       $this->validator($request->all())->validate();
-
-       event(new Registered($user = $this->create($request->all())));
-
-       \Auth::logout();
-
-       return $this->registered($request, $user)
-                    ?: redirect($this->redirectPath());
-    }
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        // $this->guard()->login($user);
+        return $this->registered($request, $user)
+                            ?: redirect($this->redirectPath());
+     }
 }
