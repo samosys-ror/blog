@@ -92,7 +92,7 @@ class UserController extends Controller
          
         if($rsp->status()==200)
        {
-            $Auth::guard()->logout();   
+            Auth::guard()->logout();   
             return view('auth/success');
        }
    } 
