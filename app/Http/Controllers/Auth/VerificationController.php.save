@@ -1,18 +1,18 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
-
-
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Auth;
 use App\User;
+
 use Illuminate\Auth\Events\Verified;
+
 use Illuminate\Http\Request;
-
-
 
 class VerificationController extends Controller
 {
@@ -29,7 +29,7 @@ class VerificationController extends Controller
 
     //use VerifiesEmails;
    
-     use VerifiesEmails;
+     use VerifiesEmails, RegistersUsers;
 
 
     /**
@@ -37,8 +37,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-
-    //protected $redirectTo ='/success';
+    protected $redirectTo ='/success';
 
     /**
      * Create a new controller instance.
@@ -52,20 +51,21 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    public function verify(Request $request)
-    {
-        $user = User::find($request->route('id'));  
-        /*$this->guard()->login($user);*/
+ public function verify(Request $request)
+{
+     $user = User::find($request->route('id'));
 
-        if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) 
-        {
-            throw new AuthorizationException;
-        }
 
-        if ($user->markEmailAsVerified())
-            event(new Verified($user));
-        
-        return redirect('success/'.base64_encode($request->route('id')))->with('verified', true);
+     $this->guard()->login($user);
+
+
+    if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+        throw new AuthorizationException;
     }
-}
 
+    if ($user->markEmailAsVerified())
+        event(new Verified($user));
+
+    return redirect($this->redirectPath())->with('verified', true);
+   }
+}

@@ -41,11 +41,16 @@ class UserController extends Controller
 
 
     }
+    public function emailverify()
+    {
+        return view('auth/verify');
+    }
 
 
+    public function success(Request $request)
+    { 
+ 
 
-  public function success()
-   { 
        $header=[    
               "Api-Key"=>"14FF3618556206C62CAD177EC037C952",
               "login_name"=>'Apps_Vila',
@@ -68,8 +73,7 @@ class UserController extends Controller
 
        
 
-       $usr=Auth::user();
-
+       $usr=User::find(base64_decode($request->route('id')));
 
     $data= [
         "Api-Key"=>"14FF3618556206C62CAD177EC037C952",
@@ -92,7 +96,7 @@ class UserController extends Controller
          
         if($rsp->status()==200)
        {
-            Auth::guard()->logout();   
+             
             return view('auth/success');
        }
    } 

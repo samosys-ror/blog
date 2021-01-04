@@ -24,17 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        if(Auth::user()){
-
-
-                     return view('home');
-                  
-
+        if(Auth::user())
+        {
+            return view('home');              
         }
-        else{
-              return view('auth/login');
-
+        else
+        {
+            return view('auth/login');
         }
        
     }
